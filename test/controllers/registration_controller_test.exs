@@ -6,7 +6,7 @@ defmodule Peepchat.RegistrationControllerTest do
   @valid_attrs %{
     email: "alex@example.com",
     password: "abcde12345",
-    password_confirmation: "abcde12345"
+    "password-confirmation": "abcde12345"
   }
 
   @invalid_attrs %{}
@@ -16,7 +16,7 @@ defmodule Peepchat.RegistrationControllerTest do
   end
 
   test "creates and renders resouce when data is vald", %{conn: conn} do
-    conn = post conn, registration_path(conn, :create), %{data: %{type: "user",
+    conn = post conn, registration_path(conn, :create), %{data: %{type: "users",
       attributes: @valid_attrs
       }}
     assert json_response(conn, 201)["data"]["id"]
@@ -25,7 +25,7 @@ defmodule Peepchat.RegistrationControllerTest do
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
     assert_error_sent 400, fn ->
-      conn = post conn, registration_path(conn, :create), %{data: %{type: "user",
+      conn = post conn, registration_path(conn, :create), %{data: %{type: "users",
         attributes: @invalid_attrs
       }}
     end
